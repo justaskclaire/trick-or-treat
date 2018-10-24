@@ -1,9 +1,12 @@
-var knock = function() {
+document.addEventListener('DOMContentLoaded', function() {
+	doorCrack('#door');
+});
+
+var enter = function() {
 	// Open Door
 	var door = document.querySelector('#jamb');
 	var newdoor = door.cloneNode(true);
-	document.querySelector('#door').classList.add('crack');
-	document.querySelector('#door').classList.add('open');
+	document.querySelector('#door').classList.add('finishOpen');
 	document.querySelector('#jamb').classList.add('spread');
 	
 	// Randomly assign trick or treat
@@ -37,5 +40,19 @@ var knock = function() {
 	setTimeout(function() {
 			door.remove();
 			document.body.appendChild(newdoor);
+			doorCrack('#door');
 	}, 500)
+}
+
+function doorCrack(selector) {
+	var element = document.querySelector(selector);
+	
+	element.addEventListener('mouseenter', function() {
+		this.classList.remove('closed');
+		this.classList.add('cracked');
+	})
+	element.addEventListener('mouseleave', function() {
+		this.classList.remove('cracked');
+		this.classList.add('closed');		
+	})
 }
